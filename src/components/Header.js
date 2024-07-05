@@ -1,8 +1,20 @@
 import logo from '../../logo.png'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
 const Header=()=>{
     const [btnName, setbtnName] = useState('Login');
+    const navigate = useNavigate();
+    const handleButtonClick = ()=>{
+        if(btnName ==='Login'){
+            navigate('/login');
+        }
+        else{
+            ///handle logout logic
+            console.log('Logged out');
+            navigate('/home');
+        }
+        setbtnName(btnName ==='Login'?'Logout':'Login');
+    };
     return (
         <div className='header'>
             <div className='logoimg'>
@@ -18,11 +30,7 @@ const Header=()=>{
                     <li>
                         <button className='btn'
                         
-                        onClick={()=>{
-                           btnName =='Login'?
-                           setbtnName('Logout'):
-                           setbtnName('Login')
-                        }}
+                        onClick={handleButtonClick}
                         
                         >{btnName}</button>
                     </li>

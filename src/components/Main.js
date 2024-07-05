@@ -2,7 +2,7 @@ import RestroCard from "./RestroCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 import { API_LINK } from "../utilis/constants";
-
+import { Link } from "react-router-dom";
 const Main = () => {
   const [resList, setRestros] = useState([]);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -19,7 +19,7 @@ const Main = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const json = await response.json();
-      console.log(json?.data);
+      // console.log(json?.data);
 
       setRestros(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
       setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
@@ -74,7 +74,10 @@ const Main = () => {
       </div>
       <div className="cards">
         {listOfRestaurants.map((restaurant) => (
-          <RestroCard key={restaurant.info.id} resData={restaurant} />
+          <Link to={'/restaurants/'+restaurant.info.id} key={restaurant.info.id}>
+          <RestroCard  resData={restaurant} />
+          </Link>
+          
         ))}
       </div>
     </div>

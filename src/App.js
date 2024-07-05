@@ -7,7 +7,7 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Error from './components/Error'
 import RestroMenu from './components/RestroMenu'
-
+import Login from './components/Login'
 import { createBrowserRouter,RouterProvider,Outlet } from 'react-router-dom'
 
 
@@ -42,18 +42,18 @@ const appRouter = createBrowserRouter([
             {
                 path:"/restaurants/:resId",
                 element:<RestroMenu/>
-            }
+            },
+           
+            
         ],
         errorElement:<Error/>
     },
-    // {
-    //     path:"/about",
-    //     element: <About/>,
-    // },
-    // {
-    //     path:"/contact",
-    //     element: <Contact/>,
-    // },
+    {
+        path:"/login",
+        element:<Login/>
+    }
+   
+  
 ])
 
 const root = ReactDOM.createRoot(document.querySelector('.root'));

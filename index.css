@@ -105,6 +105,7 @@ a {
 .card:hover{
     cursor: pointer;
     border: 1px solid #fff; 
+    scale: 105%;
 }
 .rest-logo {
     /* width: 100%; 
@@ -193,6 +194,109 @@ a {
   .error-page .error-back-home a:hover {
     background-color: var(--dark-green);
   }
+
+/*Menuu styling**/
+/* Menu styling **/
+.menu-header {
+  background-color:#192A56; /* Dark theme color */
+  color: #f8fafc; /* Light color for text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px; /* Padding for spacing */
+  border-radius: 10px; /* Rounded corners for better visual */
+  max-width: 1200px; /* Limit the maximum width */
+  margin: 20px 150px; /* Center the header */
+}
+
+.menu-header .menu-header-left img {
+  width: 250px;
+  height: 170px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.menu-header .menu-header-right .top h1 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.menu-header .menu-header-right .top h3 {
+  font-weight: normal;
+  opacity: 0.7;
+  margin-top: 5px;
+}
+
+.menu-header .menu-header-right .bottom {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.menu-header .menu-header-right .bottom h4 {
+  border-right: 4px solid #ccc;
+  padding-right: 20px;
+}
+
+.menu-main {
+  margin: 80px 150px;
+}
+
+.menu-main h2 {
+  font-size: 30px;
+  opacity: 0.8;
+}
+
+.menu-main .items {
+  font-size: 14px;
+  opacity: 0.6;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.menu-main-card-container {
+  margin-top: 50px;
+  border-radius: 7px;
+}
+
+.menu-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  background-color: #2f2f2f; /* Dark card background */
+  padding: 20px;
+  border-bottom: 1px solid #fff;
+}
+
+.menu-card-left .menu-name {
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.menu-card-left .menu-price {
+  font-weight: normal;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+.menu-card-left .menu-description {
+  font-weight: normal;
+  opacity: 0.8;
+  margin-top: 15px;
+}
+
+.menu-card-right img {
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
 .footer {
     background-color: aliceblue;
     color: black;
