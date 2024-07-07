@@ -1,4 +1,4 @@
-import { CDN_LINK } from "../utilis/constants";
+import { CDN_LINK } from "../utils/constants";
 const RestroCard= (props)=>{
     const {resData} = props;
 

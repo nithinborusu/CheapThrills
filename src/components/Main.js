@@ -1,12 +1,16 @@
 import RestroCard from "./RestroCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
-import { API_LINK } from "../utilis/constants";
+import { API_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
+import { useOnline } from "../utils/useOnline";
+import Offline from "./Offline";
 const Main = () => {
   const [resList, setRestros] = useState([]);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const isOnline = useOnline();
 
   useEffect(() => {
     fetchapi();
@@ -40,7 +44,9 @@ const Main = () => {
       setListOfRestaurants(resList);
     }
   };
-  
+  if(!isOnline){
+    return <Offline/>
+  }
   return(listOfRestaurants.length==0)?
   <Shimmer/>:(
     <div className="main">

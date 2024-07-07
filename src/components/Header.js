@@ -1,8 +1,11 @@
 import logo from '../../logo.png'
 import { useState } from 'react';
 import { Link ,useNavigate } from 'react-router-dom';
+import { useOnline } from '../utils/useOnline';
 const Header=()=>{
     const [btnName, setbtnName] = useState('Login');
+    const isOnline = useOnline();
+    console.log(isOnline);
     const navigate = useNavigate();
     const handleButtonClick = ()=>{
         if(btnName ==='Login'){
@@ -22,10 +25,16 @@ const Header=()=>{
             </div>
             <div className='navitems-container'>
                 <ul className='navitems'>
-                    <li className='item'><Link to="/home">Home</Link></li>
+                    <li className='item'>
+                        {
+                          isOnline?"online":"offline"  
+                        }
+                    </li>
+                    <li className='item'><Link to="/">Home</Link></li>
                     <li className='item'><Link to="/about">About</Link></li>
                     <li className='item'><Link to="/contact">Contact</Link></li>
                     <li className='item'><Link to="/">Cart</Link></li>
+                    <li className='item'><Link to="/instamart">Instamart</Link></li>
 
                     <li>
                         <button className='btn'

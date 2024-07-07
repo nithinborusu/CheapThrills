@@ -12,7 +12,7 @@ const Error = () =>{
         <h1>Ooops! The restaurant you're looking for can't be found.</h1>
         <h3 className="error-data">{error.data}</h3>
         <h3 className="error-back-home">
-            <Link to="/home">Back Home</Link>
+            <Link to="/">Back Home</Link>
         </h3>
        </div>
     );
