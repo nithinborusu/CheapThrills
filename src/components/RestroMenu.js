@@ -25,17 +25,18 @@ const RestaurantMenu = () => {
   const menuCards = resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[2]?.card?.card?.itemCards || [];
 
   return (
-    <div className="menu">
-      <header className="menu-header">
+    <div className="flex flex-col justify-center items-center gap-10 ">
+      <header className="my-10 mx-6 bg-[#024388] flex  items-center space-x-10 rounded-lg ">
         {cloudinaryImageId && (
-          <div className="menu-header-left">
-            <img src={CDN_LINK + cloudinaryImageId} alt="Restaurant Info" />
+          <div className="img"> 
+            <img  className=" rounded-lg  h-[250px] "src={CDN_LINK + cloudinaryImageId} alt="Restaurant Info" />
           </div>
         )}
-        <div className="menu-header-right">
-          <div className="top">
-            <h1>{name || 'Restaurant Name'}</h1>
-            {cuisines && <h3>{cuisines.join(', ')}</h3>}
+        <div className="pr-20">
+          <div className="mb-4 text-wrap">
+            <h1 className='text-xl text-white font-bold'>{name || 'Restaurant Name'}</h1>
+            {cuisines &&
+             <h3 className='text-sm  text-slate-100  italic '>{cuisines.join(', ')}</h3>}
           </div>
           <div className="bottom">
             {avgRating && (
@@ -45,7 +46,7 @@ const RestaurantMenu = () => {
                   style={{
                     position: 'relative',
                     top: '2px',
-                    marginRight: '3px',
+                      marginRight: '3px',
                   }}
                 >
                   <AiOutlineStar />

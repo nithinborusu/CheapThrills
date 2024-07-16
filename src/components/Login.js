@@ -5,7 +5,6 @@ import { Formik,Form,Field,ErrorMessage } from "formik";
 
 import * as Yup from 'yup';
 
-import '../../public/css/Login.css';
 
 import { useNavigate } from "react-router-dom";
 

@@ -5,10 +5,12 @@ import { API_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { useOnline } from "../utils/useOnline";
 import Offline from "./Offline";
+
 const Main = () => {
   const [resList, setRestros] = useState([]);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [noResError, setNoResError] = useState("");
 
   const isOnline = useOnline();
 
@@ -23,12 +25,9 @@ const Main = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const json = await response.json();
-      // console.log(json?.data);
-
       setRestros(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
       setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
-
-      console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setNoResError("");
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
@@ -40,52 +39,79 @@ const Main = () => {
         (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
       );
       setListOfRestaurants(searchedRestros);
+      if (searchedRestros.length === 0) {
+        setNoResError("No Restaurants Found");
+      } else {
+        setNoResError("");
+      }
     } else {
       setListOfRestaurants(resList);
+      setNoResError("");
     }
   };
-  if(!isOnline){
-    return <Offline/>
+
+  if (!isOnline) {
+    return <Offline />;
   }
-  return(listOfRestaurants.length==0)?
-  <Shimmer/>:(
-    <div className="main">
-      <div className="Search">
-        <input
-          type="text"
-          value={searchText}
-          className="input"
-          placeholder="Search For Your fav Restra.. "
-          onChange={(e) => {
-            const text = e.target.value;
-            setSearchText(text);
-            handleSearch(text);
-          }}
-        />
+
+  return(listOfRestaurants.length==0)? (
+    <Shimmer />
+  ):
+  (
+    <div className="bg-[rgb(239,233,217)]" >
+      <div className="filter bg-[url('./public/Images/bgrnd.jpg')] text-slate-100 text-center p-8 bg-fixed">
+        <div className="m-8 mt-0 whitespace-nowrap">
+          <div className="heading text-3xl">Order Delivery & Take-Out</div>
+          <div className="m-2 text-lg">Find Best Restaurants near you</div>
+        </div>
+
+        <div className="Search m-2 space-x-2 text-black">
+          <input
+            type="text"
+            value={searchText}
+            className="rounded-md h-8 w-4/5 sm:w-1/5 p-3"
+            placeholder="Search For Your fav Restra.."
+            onChange={(e) => {
+              const text = e.target.value;
+              setSearchText(text);
+              handleSearch(text);
+            }}
+          />
+          <button className="h-8 mx-4 px-4 bg-red-700 text-slate-100 rounded-md hidden sm:inline-block">Search</button>
+        </div>
       </div>
-      <div className="filter">
+
+      <div className=" my-4 flex items-center justify-center text-white ">
         <button
-          className="filter-btn"
+          className="bg-red-700 p-2 px-4  rounded-md"
           onClick={() => {
             const topRestros = resList.filter(
               (res) => res.info.avgRating > 4.2
             );
             setListOfRestaurants(topRestros);
-            console.log(topRestros);
-            console.log(listOfRestaurants);
+            if (topRestros.length === 0) {
+              setNoResError("No Top Rated Restaurants Found");
+            } else {
+              setNoResError("");
+            }
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
-      <div className="cards">
-        {listOfRestaurants.map((restaurant) => (
-          <Link to={'/restaurants/'+restaurant.info.id} key={restaurant.info.id}>
-          <RestroCard  resData={restaurant} />
-          </Link>
-          
-        ))}
-      </div>
+
+      {noResError ? (
+        <div className="text-center text-red-500">{noResError}</div>
+      ) : (
+        <div className="mx-6 my-2 p-2 flex flex-wrap gap-2 justify-center items-center">
+          {listOfRestaurants.map((restaurant) => (
+            <Link to={'/restaurants/' + restaurant.info.id} key={restaurant.info.id}>
+             
+              <RestroCard resData={restaurant} />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
