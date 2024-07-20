@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Shimmer() {
-  console.log("shimmer")
+  // console.log("shimmer")
   return (
     <div data-testid="shimmer">
     <div className="h-40 bg-slate-300"></div>

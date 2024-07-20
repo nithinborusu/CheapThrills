@@ -14,7 +14,7 @@ const [resInfo, setResInfo] = useState(null);
   const fetchMenu = async () => {
     const data = await fetch(MENU_LINK + resId);
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     setResInfo(json.data);
   };
 

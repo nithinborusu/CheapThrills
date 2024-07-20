@@ -1,19 +1,26 @@
-import RestroCard from "./RestroCard";
+import RestroCard, {isVeg} from "./RestroCard";
 import Shimmer from "./Shimmer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { API_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { useOnline } from "../utils/useOnline";
 import Offline from "./Offline";
+import UserContext from "../utils/UserContext";
 
 const Main = () => {
+
+
   const [resList, setRestros] = useState([]);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [noResError, setNoResError] = useState("");
+  
+  const {LoggedInUser,setUserName} = useContext(UserContext);
 
+  const RestroCardVeg = isVeg(RestroCard);
   const isOnline = useOnline();
 
+  console.log("list",resList);
   useEffect(() => {
     fetchapi();
   }, []);
@@ -81,7 +88,7 @@ const Main = () => {
         </div>
       </div>
 
-      <div className=" my-4 flex items-center justify-center text-white ">
+      <div className="top-rated my-4 flex items-center justify-center text-white gap-3 ">
         <button
           className="bg-red-700 p-2 px-4  rounded-md"
           onClick={() => {
@@ -98,6 +105,13 @@ const Main = () => {
         >
           Top Rated Restaurants
         </button>
+        <div className="text-black">
+          <label className="font-bold">UserName: </label>
+          <input className="border border-black p-2"
+          value={LoggedInUser}  onChange={(e)=>setUserName(e.target.value)}
+          />
+        </div>
+      
       </div>
 
       {noResError ? (
@@ -107,7 +121,13 @@ const Main = () => {
           {listOfRestaurants.map((restaurant) => (
             <Link to={'/restaurants/' + restaurant.info.id} key={restaurant.info.id}>
              
-              <RestroCard resData={restaurant} />
+
+              {restaurant.info.veg?(
+                <RestroCardVeg resData={restaurant}/>
+              ):
+              (<RestroCard resData={restaurant} />
+
+              )}
             </Link>
           ))}
         </div>

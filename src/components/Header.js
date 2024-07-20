@@ -1,8 +1,13 @@
 import logo from '../../public/Images/newlogo.png'
-import { useState ,useEffect} from 'react';
+import { useState ,useEffect, useContext} from 'react';
 import { Link ,useNavigate } from 'react-router-dom';
-import { useOnline } from '../utils/useOnline';
+// import { useOnline } from '../utils/useOnline';
 import { useLocation } from 'react-router-dom';
+import UserContext from '../utils/UserContext';
+
+import { useSelector } from 'react-redux';
+
+
 const Title = () => (
     <Link className=" " to="/">  <div className="text-white flex items-center mx-4">
       <img data-testid="logo" className=" h-12" src={logo} alt="" />
@@ -14,9 +19,14 @@ const Title = () => (
 const Header=()=>{
     const [isFixed,setIsFixed] =  useState(false);
     const [btnName, setbtnName] = useState('Login');
-    const isOnline = useOnline();
+    // const isOnline = useOnline();
     const location = useLocation();
-    console.log(isOnline);
+    /** **console.log(isOnline); */ 
+     
+    const {LoggedInUser} = useContext(UserContext);
+    const cartItems = useSelector((store)=> store.cart.items);
+
+   
     const navigate = useNavigate();
     const handleButtonClick = ()=>{
         if(btnName ==='Login'){
@@ -45,11 +55,11 @@ const Header=()=>{
 
 
     return (
-        <div className={`font-serif  ${isFixed? 'fixed z-10':'relative' } w-full`} >
+        <div className={`font-serif  ${isFixed? 'fixed  top-0 z-10':'relative' } w-full`} >
               <div className=' bg-fixed items-center bg-black shadow-2xl flex  flex-col sm:flex-row sm:justify-between'>
             <Title/>
             <div className='navitems py-5 whitespace-nowrap '>
-                <ul className='flex  text-white space-x-4 mx-4  lg:space-x-8 lg:mx-8 '>
+                <ul className='flex flex-wrap text-white space-x-4 mx-4  lg:space-x-8 lg:mx-8 '>
                     {/* <li className='item'>
                         {
                           isOnline?"online":"offline"  
@@ -65,7 +75,7 @@ const Header=()=>{
                         <Link to="/contact">Contact</Link>
                         </li> */}
                     <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname =="#"? "bg-[#192A56]":"slate-105"}`}>
-                    <Link to="#">Cart</Link>
+                    <Link to="/Cart">Cart ({cartItems.length} items)</Link>
                     </li>
                     <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname =="/instamart"? "bg-[#192A56]":"slate-105"}`}>
                         
@@ -79,6 +89,7 @@ const Header=()=>{
                         
                         >{btnName}</button>
                     </li>
+                    <li  className='p-2 px-4 text-yellow-300'>{LoggedInUser}</li>
                 </ul>
             </div>
         </div>

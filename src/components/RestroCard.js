@@ -2,10 +2,11 @@
 import { CDN_LINK } from "../utils/constants";
 import { AiOutlineStar } from 'react-icons/ai';
 import { AiOutlineClockCircle } from "react-icons/ai";
+import vegIcon from "../../public/Images/icons8-veg-32.png"
 const RestroCard= (props)=>{
     const {resData} = props;
 
-    const{cloudinaryImageID,
+    const{
       name,
       cuisines,
       avgRating,
@@ -16,12 +17,12 @@ const RestroCard= (props)=>{
     return null;
   }
     return (
-       <div className='m-8 border shadow-xl  rounded-lg duration-200 hover:scale-105 h-full w-[260px] bg-[#024388] text-white'>
+       <div className='m-8 border shadow-xl  rounded-lg duration-200 hover:scale-105 h-full w-[250px] bg-[#024388] text-white'>
 
            <img className='rounded-t-lg w-full h-[200px] '
                src= {CDN_LINK + resData.info.cloudinaryImageId}
                alt='food'/>
-           <div className="m-2 p-1">
+           <div className="mx-2 p-1">
            <h3 className="pb-1 text-xl text-white  font-bold truncate ...">{name}</h3>
            <hr/>
            <h4 className=" pt-1 text-sm text-slate-200 italic truncate ...">{cuisines.join(", ")}</h4>
@@ -52,7 +53,20 @@ const RestroCard= (props)=>{
 }; 
 
 //higher order component
-//input- Restaurant => restaurantcardPromoted
+//input- Restaurant => restaurantcardVeg
+
+export const isVeg= (RestroCard)=>{
+  return(props)=>{
+    return(
+      <div>
+        <img className="absolute ml-8 "
+        src={vegIcon}/>
+        
+        <RestroCard {...props} />
+      </div>
+    )
+  }
+}
 
 
 
