@@ -34,7 +34,7 @@ To set up the Food Ordering App project locally, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/mikasa-404/food-ordering-app
+    git clone https://github.com/nithinborusu/CheapThrills.git
     ```
 
 2. Navigate to the project directory:
