@@ -1,16 +1,13 @@
-import logo from '../../public/Images/newlogo.png'
 import { useState ,useEffect, useContext} from 'react';
 import { Link ,useNavigate } from 'react-router-dom';
-// import { useOnline } from '../utils/useOnline';
 import { useLocation } from 'react-router-dom';
 import UserContext from '../utils/UserContext';
-
 import { useSelector } from 'react-redux';
 
 
 const Title = () => (
     <Link className=" " to="/">  <div className="text-white flex items-center mx-4">
-      <img data-testid="logo" className=" h-12" src={logo} alt="" />
+      <img data-testid="logo" className=" h-12" src="https://cdn-icons-png.flaticon.com/128/3655/3655682.png" alt="" />
       <h1 className="font-serif font-bold text-xl m-0 mx-1">Cheap Thrills</h1>
     </div>
     </Link>
@@ -19,9 +16,9 @@ const Title = () => (
 const Header=()=>{
     const [isFixed,setIsFixed] =  useState(false);
     const [btnName, setbtnName] = useState('Login');
-    // const isOnline = useOnline();
+
     const location = useLocation();
-    /** **console.log(isOnline); */ 
+    
      
     const {LoggedInUser} = useContext(UserContext);
     const cartItems = useSelector((store)=> store.cart.items);
@@ -29,16 +26,17 @@ const Header=()=>{
    
     const navigate = useNavigate();
     const handleButtonClick = ()=>{
-        if(btnName ==='Login'){
-            navigate('/login');
-        }
-        else{
-            ///handle logout logic
-            console.log('Logged out');
-            navigate('/home');
-        }
+        // if(btnName ==='Login'){
+        //     navigate('/login');
+        // }
+        // else{
+        //     ///handle logout logic
+        //     console.log('Logged out');
+        //     navigate('/home');
+        // }
         setbtnName(btnName ==='Login'?'Logout':'Login');
     };
+
 
     useEffect(()=>{
         const handleScroll =()=>{
@@ -60,20 +58,16 @@ const Header=()=>{
             <Title/>
             <div className='navitems py-5 whitespace-nowrap '>
                 <ul className='flex flex-wrap text-white space-x-4 mx-4  lg:space-x-8 lg:mx-8 '>
-                    {/* <li className='item'>
-                        {
-                          isOnline?"online":"offline"  
-                        }
-                    </li> */}
+                  
                     <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname =="/"?"bg-[#192A56]":"hover:scale-105"}`}>
                         <Link to="/">Home</Link>
                         </li>
                     <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname=="/about" ? "bg-[#192A56]": "scale-105"}`}>
                     <Link to="/about">About</Link>
                     </li>
-                    {/* <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname =="/contact"? "bg-[#192A56]":"slate-105"}`}>
+                    <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname =="/contact"? "bg-[#192A56]":"slate-105"}`}>
                         <Link to="/contact">Contact</Link>
-                        </li> */}
+                        </li>
                     <li className={`p-2 px-4 rounded-lg hover:bg-[#192A56] ${location.pathname =="#"? "bg-[#192A56]":"slate-105"}`}>
                     <Link to="/Cart">Cart ({cartItems.length} items)</Link>
                     </li>

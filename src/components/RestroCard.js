@@ -2,10 +2,10 @@
 import { CDN_LINK } from "../utils/constants";
 import { AiOutlineStar } from 'react-icons/ai';
 import { AiOutlineClockCircle } from "react-icons/ai";
-import vegIcon from "../../public/Images/icons8-veg-32.png"
+
 const RestroCard= (props)=>{
     const {resData} = props;
-
+    // console.log(resData);
     const{
       name,
       cuisines,
@@ -17,7 +17,8 @@ const RestroCard= (props)=>{
     return null;
   }
     return (
-       <div className='m-8 border shadow-xl  rounded-lg duration-200 hover:scale-105 h-full w-[250px] bg-[#024388] text-white'>
+       <div data-testid="resCard"
+       className='m-8 border shadow-xl  rounded-lg duration-200 hover:scale-105 h-full w-[250px] bg-[#024388] text-white'>
 
            <img className='rounded-t-lg w-full h-[200px] '
                src= {CDN_LINK + resData.info.cloudinaryImageId}
@@ -59,8 +60,8 @@ export const isVeg= (RestroCard)=>{
   return(props)=>{
     return(
       <div>
-        <img className="absolute ml-8 "
-        src={vegIcon}/>
+        <img className="absolute ml-8  w-8 z-40"
+        src="https://img.icons8.com/?size=100&id=DVGrLsbRV2No&format=png&color=000000"/>
         
         <RestroCard {...props} />
       </div>

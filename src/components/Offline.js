@@ -1,4 +1,4 @@
-import  offline from "../../public/Images/offline.png"
+// import  offline from "../../public/Images/offline.png"
 import React from "react";
 const Offline = () =>{
 

@@ -20,7 +20,7 @@ const Main = () => {
   const RestroCardVeg = isVeg(RestroCard);
   const isOnline = useOnline();
 
-  console.log("list",resList);
+  // console.log("list",resList);
   useEffect(() => {
     fetchapi();
   }, []);
@@ -36,9 +36,10 @@ const Main = () => {
       setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
       setNoResError("");
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      // console.error("Failed to fetch data:", error);
     }
   };
+
 
   const handleSearch = (searchText) => {
     if (searchText) {
@@ -125,7 +126,7 @@ const Main = () => {
               {restaurant.info.veg?(
                 <RestroCardVeg resData={restaurant}/>
               ):
-              (<RestroCard resData={restaurant} />
+              (<RestroCard resData={restaurant}  />
 
               )}
             </Link>

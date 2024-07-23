@@ -89,6 +89,7 @@ console.log(categories);
            index={index}
            Showitems={index===ShowIndex?true:false}
            toggleShowIndex ={()=>{toggleShowIndex(index)}}
+           
 
            
           />

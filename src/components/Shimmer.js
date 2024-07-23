@@ -3,7 +3,7 @@ import React from 'react'
 function Shimmer() {
   // console.log("shimmer")
   return (
-    <div data-testid="shimmer">
+    <div >
     <div className="h-40 bg-slate-300"></div>
       <div className="mx-10 my-10 p-5"> 
       <div className="res-container grid grid-cols-5 mx-4 gap-12">
