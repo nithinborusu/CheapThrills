@@ -1,4 +1,4 @@
-# Foodyville -Food Ordering App  🥞
+# Cheap Thrills -Food Ordering App  🥞
 
 This is a food ordering app project developed using ReactJS. The app aims to provide a seamless experience for users to order food from various restaurants near them. 
 
